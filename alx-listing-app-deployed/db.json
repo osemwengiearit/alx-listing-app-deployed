@@ -1,0 +1,43 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "title": "Luxury Villa",
+      "location": "Lagos, Nigeria",
+      "price": 85000,
+      "imageUrl": "/images/property1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "City Apartment",
+      "location": "Abuja, Nigeria",
+      "price": 60000,
+      "imageUrl": "/images/property2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Beach House",
+      "location": "Port Harcourt, Nigeria",
+      "price": 95000,
+      "imageUrl": "/images/property3.jpg"
+    }
+  ],
+  "bookings": [],
+  "reviews": [
+    {
+      "id": 1,
+      "propertyId": 1,
+      "comment": "Amazing place, very spacious and clean."
+    },
+    {
+      "id": 2,
+      "propertyId": 1,
+      "comment": "Perfect location and friendly host."
+    },
+    {
+      "id": 3,
+      "propertyId": 2,
+      "comment": "Great apartment but a bit noisy."
+    }
+  ]
+}
