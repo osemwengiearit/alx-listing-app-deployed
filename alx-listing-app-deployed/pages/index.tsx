@@ -1,45 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../components/Layout';
-import PropertyCard from '../components/PropertyCard';
+import Image from "next/image";
+import localFont from "next/font/local";
 
+import Header from "@/components/layout/Header";
 
-export default function Home() {
-  const [properties, setProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const res = await fetch('http://localhost:3001/properties');
-        if (!res.ok) {
-          throw new Error('Failed to fetch properties');
-        }
-
-        const data = await res.json();
-        setProperties(data);
-        setLoading(false);
-      } catch (err: any) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
-    fetchProperties();
-  }, []);
-
+const Home: React.FC = () => {
   return (
-    <Layout>
-      <h1 className="text-2xl font-bold mb-4">Available Properties</h1>
-
-      {loading && <p>Loading properties...</p>}
-      {error && <p className="text-red-500">Error: {error}</p>}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {properties.map((property: any) => (
-          <PropertyCard key={property.id} property={property} />
-        ))}
-      </div>
-    </Layout>
-  );
+    <div className="flex flex-col h-screen">
+      <Header />
+      <main className="flex-grow flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold text-white">
+            Welcome to our Application!
+          </h1>
+          <p className="mt-4 text-xl text-white">
+            We're glad you're here. Explore and enjoy your experience.
+          </p>
+          <button className="mt-6 px-6 py-3 bg-white text-blue-500 rounded-full font-semibold hover:bg-gray-200 transition">
+            Get Started
+          </button>
+  </div>
+      </main>
+    </div>
+  )
 }
+
+export default Home;
+

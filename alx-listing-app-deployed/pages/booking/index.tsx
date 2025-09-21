@@ -1,67 +1,24 @@
-// pages/booking/index.tsx
-import axios from "axios";
-import { useState } from "react";
+import React from "react";
+import BookingForm from "../../components/booking/BookingForm";
+import OrderSummary from "../../components/booking/OrderSummary";
+import CancellationPolicy from "../../components/booking/CancellationPolicy";
 
-export default function BookingForm() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    cardNumber: "",
-    expirationDate: "",
-    cvv: "",
-    billingAddress: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(false);
-
-    try {
-      await axios.post("http://localhost:3001/bookings", formData);
-      setSuccess(true);
-      alert("Booking confirmed!");
-    } catch (err) {
-      setError("Failed to submit booking.");
-    } finally {
-      setLoading(false);
-    }
+export default function BookingPage() {
+  const bookingDetails = {
+    propertyName: "Villa Arrecife Beach House",
+    price: 7500,
+    bookingFee: 65,
+    totalNights: 3,
+    startDate: "24 August 2024",
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "0 auto" }}>
-      <h1>Confirm Your Booking</h1>
-      <form onSubmit={handleSubmit}>
-        {Object.keys(formData).map((key) => (
-          <div key={key} style={{ marginBottom: 10 }}>
-            <input
-              name={key}
-              value={(formData as any)[key]}
-              onChange={handleChange}
-              placeholder={key}
-              required
-              style={{ width: "100%", padding: 8 }}
-            />
-          </div>
-        ))}
-        <button type="submit" disabled={loading}>
-          {loading ? "Processing..." : "Confirm & Pay"}
-        </button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>Booking successful!</p>}
+    <div className="container mx-auto p-6">
+      <div className="grid grid-cols-2 gap-6">
+        <BookingForm />
+        <OrderSummary bookingDetails={bookingDetails} />
+        <CancellationPolicy />
+      </div>
     </div>
   );
 }
